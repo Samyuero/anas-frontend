@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hide browser's native password reveal eye icon (Edge/Chrome) */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear,
+input[type="password"]::-webkit-credentials-auto-fill-button {
+  display: none !important;
+}
+
+/* Also hide for text type when toggled to show password */
+input::-ms-reveal,
+input::-ms-clear {
+  display: none !important;
+}
+
+/* Toast slide-in animation */
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.animate-slideIn {
+  animation: slideIn 0.3s ease-out;
+}
