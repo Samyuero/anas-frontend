@@ -1,1 +1,0 @@
-var e=`http://localhost:8000/api`,t=`http://localhost:8000`;export{t as n,e as t};
