@@ -58,7 +58,7 @@ const CartPage = ({ refreshCartCount }) => {
       if (item.product.image.startsWith('http')) return item.product.image;
       return `${BASE_URL}/uploads/products/${item.product.image}`;
     }
-    return 'https://via.placeholder.com/120';
+    return "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect width='120' height='120' fill='%23f0f0f0'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23999' font-size='11' font-family='sans-serif'%3ENo Image%3C/text%3E%3C/svg%3E";
   };
 
   if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
@@ -104,7 +104,7 @@ const CartPage = ({ refreshCartCount }) => {
                     {items.map((item) => (
                       <tr key={item.id} className="border-b border-gray-100">
                         <td className="py-4">
-                          <img src={getImageSrc(item)} alt={item.name} className="w-20 h-20 object-cover rounded" onError={(e) => { e.target.src = 'https://via.placeholder.com/120'; }} />
+                          <img src={getImageSrc(item)} alt={item.name} className="w-20 h-20 object-cover rounded" onError={(e) => { e.target.onerror = null; e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect width='120' height='120' fill='%23f0f0f0'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23999' font-size='11' font-family='sans-serif'%3ENo Image%3C/text%3E%3C/svg%3E"; }} />
                         </td>
                         <td className="py-4"><h4 className="text-sm font-medium text-slate-900">{item.name}</h4></td>
                         <td className="py-4"><span className="text-sm text-slate-900">₱{parseFloat(item.price).toFixed(2)}</span></td>
