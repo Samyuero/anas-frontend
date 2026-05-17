@@ -38,11 +38,11 @@ const AddProduct = () => {
   const fetchCategoriesAndBrands = async () => {
     try {
       const [catRes, brandRes] = await Promise.all([
-        fetch(`${API_URL}/admin/categories`, { 
-          headers: { 'Authorization': `Bearer ${getToken()}` } 
+        fetch(`${API_URL}/admin/categories`, {
+          headers: { 'Authorization': `Bearer ${getToken()}` }
         }),
-        fetch(`${API_URL}/admin/brands`, { 
-          headers: { 'Authorization': `Bearer ${getToken()}` } 
+        fetch(`${API_URL}/admin/brands`, {
+          headers: { 'Authorization': `Bearer ${getToken()}` }
         })
       ]);
 
@@ -58,20 +58,20 @@ const AddProduct = () => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    
+
     setFormData(prev => {
       const newData = {
         ...prev,
         [name]: type === 'checkbox' ? (checked ? '1' : '0') : value
       };
-      
+
       // Auto-generate slug from name
       if (name === 'name') {
         newData.slug = value.toLowerCase()
           .replace(/\s+/g, '-')
           .replace(/[^a-z0-9-]/g, '');
       }
-      
+
       return newData;
     });
   };
@@ -100,7 +100,7 @@ const AddProduct = () => {
 
     try {
       const data = new FormData();
-      
+
       // Append all form fields
       Object.keys(formData).forEach(key => {
         data.append(key, formData[key]);
@@ -113,7 +113,7 @@ const AddProduct = () => {
 
       // Append gallery images (optional)
       galleryImages.forEach((file) => {
-        data.append('gallery_images[]', file);
+        data.append('images[]', file);
       });
 
       const res = await fetch(`${API_URL}/admin/products`, {
@@ -168,8 +168,8 @@ const AddProduct = () => {
             <label className="block text-sm font-semibold text-slate-800 mb-2">
               Product name <span className="text-red-500">*</span>
             </label>
-            <input 
-              type="text" 
+            <input
+              type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
@@ -184,8 +184,8 @@ const AddProduct = () => {
             <label className="block text-sm font-semibold text-slate-800 mb-2">
               Slug <span className="text-red-500">*</span>
             </label>
-            <input 
-              type="text" 
+            <input
+              type="text"
               name="slug"
               value={formData.slug}
               onChange={handleChange}
@@ -201,7 +201,7 @@ const AddProduct = () => {
               <label className="block text-sm font-semibold text-slate-800 mb-2">
                 Category <span className="text-red-500">*</span>
               </label>
-              <select 
+              <select
                 name="category_id"
                 value={formData.category_id}
                 onChange={handleChange}
@@ -218,7 +218,7 @@ const AddProduct = () => {
               <label className="block text-sm font-semibold text-slate-800 mb-2">
                 Brand <span className="text-red-500">*</span>
               </label>
-              <select 
+              <select
                 name="brand_id"
                 value={formData.brand_id}
                 onChange={handleChange}
@@ -238,7 +238,7 @@ const AddProduct = () => {
             <label className="block text-sm font-semibold text-slate-800 mb-2">
               Short Description <span className="text-red-500">*</span>
             </label>
-            <textarea 
+            <textarea
               name="short_description"
               value={formData.short_description}
               onChange={handleChange}
@@ -254,7 +254,7 @@ const AddProduct = () => {
             <label className="block text-sm font-semibold text-slate-800 mb-2">
               Description <span className="text-red-500">*</span>
             </label>
-            <textarea 
+            <textarea
               name="description"
               value={formData.description}
               onChange={handleChange}
@@ -274,8 +274,8 @@ const AddProduct = () => {
               Upload Main Image <span className="text-red-500">*</span>
             </label>
             <div className={`border-2 border-dashed rounded-lg p-8 text-center hover:bg-blue-50 transition-colors cursor-pointer relative ${errors.image ? 'border-red-500' : 'border-blue-300'}`}>
-              <input 
-                type="file" 
+              <input
+                type="file"
                 accept="image/jpeg,image/png,image/jpg"
                 onChange={handleImageChange}
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
@@ -303,8 +303,8 @@ const AddProduct = () => {
               Upload Gallery Images
             </label>
             <div className="border-2 border-dashed border-blue-300 rounded-lg p-8 text-center hover:bg-blue-50 transition-colors cursor-pointer relative">
-              <input 
-                type="file" 
+              <input
+                type="file"
                 accept="image/jpeg,image/png,image/jpg"
                 multiple
                 onChange={handleGalleryChange}
@@ -319,9 +319,9 @@ const AddProduct = () => {
               <div className="mt-4 grid grid-cols-4 gap-2">
                 {galleryImages.map((file, index) => (
                   <div key={index} className="relative">
-                    <img 
-                      src={URL.createObjectURL(file)} 
-                      alt={`Gallery ${index}`} 
+                    <img
+                      src={URL.createObjectURL(file)}
+                      alt={`Gallery ${index}`}
                       className="h-16 w-full object-cover rounded"
                     />
                     <button
@@ -343,8 +343,8 @@ const AddProduct = () => {
               <label className="block text-sm font-semibold text-slate-800 mb-2">
                 Regular Price <span className="text-red-500">*</span>
               </label>
-              <input 
-                type="number" 
+              <input
+                type="number"
                 name="regular_price"
                 value={formData.regular_price}
                 onChange={handleChange}
@@ -359,8 +359,8 @@ const AddProduct = () => {
               <label className="block text-sm font-semibold text-slate-800 mb-2">
                 Sale Price <span className="text-red-500">*</span>
               </label>
-              <input 
-                type="number" 
+              <input
+                type="number"
                 name="sale_price"
                 value={formData.sale_price}
                 onChange={handleChange}
@@ -375,8 +375,8 @@ const AddProduct = () => {
               <label className="block text-sm font-semibold text-slate-800 mb-2">
                 SKU <span className="text-red-500">*</span>
               </label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 name="SKU"
                 value={formData.SKU}
                 onChange={handleChange}
@@ -389,8 +389,8 @@ const AddProduct = () => {
               <label className="block text-sm font-semibold text-slate-800 mb-2">
                 Quantity <span className="text-red-500">*</span>
               </label>
-              <input 
-                type="number" 
+              <input
+                type="number"
                 name="quantity"
                 value={formData.quantity}
                 onChange={handleChange}
@@ -404,7 +404,7 @@ const AddProduct = () => {
               <label className="block text-sm font-semibold text-slate-800 mb-2">
                 Stock <span className="text-red-500">*</span>
               </label>
-              <select 
+              <select
                 name="stock_status"
                 value={formData.stock_status}
                 onChange={handleChange}
@@ -418,7 +418,7 @@ const AddProduct = () => {
               <label className="block text-sm font-semibold text-slate-800 mb-2">
                 Featured <span className="text-red-500">*</span>
               </label>
-              <select 
+              <select
                 name="featured"
                 value={formData.featured}
                 onChange={handleChange}
@@ -431,7 +431,7 @@ const AddProduct = () => {
           </div>
 
           {/* Add Product Button */}
-          <button 
+          <button
             type="submit"
             disabled={loading}
             className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:bg-blue-400"

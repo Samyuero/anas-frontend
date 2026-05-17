@@ -63,7 +63,7 @@ const AdminSlides = () => {
               {filtered.map((slide) => (
                 <tr key={slide.id} className="hover:bg-gray-50">
                   <td className="px-4 py-3">{slide.id}</td>
-                  <td className="px-4 py-3"><img src={`${BASE_URL}/uploads/slides/${slide.image}`} alt="" className="w-16 h-12 object-cover rounded" onError={(e) => { e.target.onerror = null; e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='60'%3E%3Crect width='80' height='60' fill='%23f0f0f0'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23999' font-size='10' font-family='sans-serif'%3ENo Image%3C/text%3E%3C/svg%3E"; }} /></td>
+                  <td className="px-4 py-3"><img src={`${BASE_URL}/uploads/slides/${slide.image}`} alt="" className="w-16 h-12 object-cover rounded" onError={(e) => { e.target.src = 'https://via.placeholder.com/80x60'; }} /></td>
                   <td className="px-4 py-3">{slide.tagline}</td>
                   <td className="px-4 py-3">{slide.title}</td>
                   <td className="px-4 py-3">{slide.subTitle}</td>
